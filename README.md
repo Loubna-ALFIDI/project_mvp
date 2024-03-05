@@ -71,3 +71,9 @@ Contributions to Anime-x-Quiz are welcome! To contribute, please follow these st
 ## Contact
 
 For any inquiries or feedback, please contact the team at 
+| Hicham Fhad                                                                                      | Loubna Alfidi                                                                                  |
+|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| [![Email](https://img.shields.io/badge/Email-%40me-red?style=flat&logo=gmail)](mailto:imalxvssteve2020@gmail.com) | [![Email](https://img.shields.io/badge/Email-%40me-red?style=flat&logo=gmail)](mailto:loubna.alfidi@gmail.com) |
+| [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/hicham-fhad-7b9070263/) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/loubna-alfidi-94a092219) |
+| [![Twitter](https://img.shields.io/badge/Twitter-Profile-lightblue?style=flat&logo=twitter)](https://twitter.com/D_Hicham2k)       | [![Twitter](https://img.shields.io/badge/Twitter-Profile-lightblue?style=flat&logo=twitter)](https://twitter.com/loubna_alfidi) |
+| [![Discord](https://img.shields.io/badge/Discord-luffy.py-blueviolet?style=flat&logo=discord)](https://discord.com/users/luffy.py)     | [![Discord](https://img.shields.io/badge/Discord-loubna_07-blueviolet?style=flat&logo=discord)](https://discord.com/users/loubna_07) |
