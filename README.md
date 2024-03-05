@@ -1,11 +1,11 @@
-## Anime-x-Quiz
-
-
-
 <p align= "center">
   <img src="../project_mvp/project_mvp/Aquiz/static/images/logo.png">
 </p>
 
+
+
+
+## Anime-x-Quiz
 
 
 ### Overview
