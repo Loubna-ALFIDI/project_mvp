@@ -29,6 +29,8 @@ Anime-x-Quiz is a web application designed to offer users an interactive platfor
   - JQuery
 - **Database**
   - Mysql
+- **Design**
+  - Adobe XD
 
 ### Installation
 1. Clone the repository:
