@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Quiz</h1>
+<ul>
+  {% for quiz in quizzes %}
+    <li><a href="{{ url_for('quiz_questions', quiz_id=quiz.id) }}">{{ quiz.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

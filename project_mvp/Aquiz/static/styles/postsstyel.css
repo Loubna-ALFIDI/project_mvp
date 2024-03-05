@@ -1,0 +1,202 @@
+/* Import the Poppins font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+/* Resetting default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply Poppins font to the body */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('../images/peakpx.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ccc;
+    min-height: 100vh; /* Ensure body extends to at least viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container for content */
+.container {
+    max-width: fit-content;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex: 1;
+}
+
+/* Header styles */
+header {
+
+    color: #fff;
+    padding: 20px;
+}
+
+/* Navigation styles */
+nav ul {
+    list-style-type: none;
+    margin-left: 640px;
+    font-size: 20px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+    text-align: center;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li:hover {
+    color: #2e00fd;
+    text-decoration: underline;
+}
+
+/* Footer styles */
+footer {
+
+    color: #fff;
+    padding: 20px;
+    margin-top: auto;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+/* User buttons styles */
+.loginsignup {
+    position: relative;
+}
+
+.user-buttons {
+    display: relative;
+    justify-content: center;
+    align-items: center;
+    margin-left: 840px; /* Adjust positioning */
+}
+
+.user-buttons button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #f0f0f0;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    border-style: dotted;
+}
+
+/* Post styles */
+section {
+    padding: 20px 0;
+}
+
+.post {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-header h3 {
+    margin-right: 10px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.post-header h6 {
+    color: #777;
+}
+
+.post-content {
+    margin-bottom: 15px;
+}
+
+.post-date {
+    display: flex;
+    color: #77777752;
+    margin-left: 500px;
+}
+
+/* Card styles */
+.card {
+    width: 380px;
+    border: none;
+    border-radius: 15px;
+    padding: 8px;
+    background-color: #fff;
+    position: relative;
+    height: 370px;
+}
+
+.upper {
+    height: 100px;
+}
+
+.upper img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.profile img {
+    height: 80px;
+    width: 80px;
+    margin-top: 2px;
+}
+
+.profile {
+    position: absolute;
+    top: -50px;
+    left: 38%;
+    height: 90px;
+    width: 90px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+
+}
+
+.follow {
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 35px;
+}
+
+.stats span {
+    font-size: 29px;
+}
+
+/* Style the aside text */
+.aside-text {
+    font-family: 'ClashDisplay-Bold', sans-serif;
+    
+    color: #fff; /* Text color */
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+}
+
+img{
+
+    height: 90px; /* Adjust the height of the logo as needed */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add spacing between the logo and other header content */
+    margin-top: -10px; /* Adjust the margin to move the logo up */
+    margin-left: -10px; 
+}

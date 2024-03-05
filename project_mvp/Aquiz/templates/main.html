@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="aside-text"> Test your anime knowledge with AQZ!</h1>
+<h3>Challenge yourself with our anime quizzes and see how much you know.</h3>
+<a href="{{ url_for('quiz') }}">
+    <button>Start Quiz</button>
+</a>
+<a>
+    <button>Learn more</button>
+</a>
+{% endblock %}
