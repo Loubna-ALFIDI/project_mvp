@@ -15,6 +15,7 @@ Anime-x-Quiz is a web application designed to offer users an interactive platfor
 ### Features
 - **Quiz Taking**: Users can take quizzes and receive instant feedback on their performance.
 - **Score Tracking**: The application tracks users' scores and displays them in a user-friendly manner.
+- **Leaderboard**: Users can view the leaderboard to see how their scores compare to others.
 - **Responsive Design**: The application is designed to be responsive and accessible on various devices.
 
 ### Technologies Used
@@ -55,7 +56,7 @@ Anime-x-Quiz is a web application designed to offer users an interactive platfor
 1. **Sign up for an account or log in if you already have one.**
 2. **Explore the available quizzes.**
 3. **Take quizzes and answer the questions.**
-4. **View your scores.**
+4. **View your scores and compare them with others on the leaderboard.**
 
 ## Contributing
 
