@@ -1,5 +1,5 @@
 ## Anime-x-Quiz
-
+![Logo](../project_mvp/project_mvp/Aquiz/static/images/logo.png)
 ### Overview
 Anime-x-Quiz is a web application designed to offer users an interactive platform to test their knowledge of anime and manga. It features quizzes with various categories and levels of difficulty, allowing anime enthusiasts to challenge themselves and compete with others.
 
