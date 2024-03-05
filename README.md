@@ -37,3 +37,37 @@ Anime-x-Quiz is a web application designed to offer users an interactive platfor
 ```bash
     pip install -r requirements.txt
 ```
+3. Set up the database:
+
+```bash
+    flask db upgrade
+```
+4. Run the application:
+
+```bash
+./run.py or ./runflask
+```
+5. Access the application in your web browser at http://localhost:5000.
+
+## Usage
+
+1. **Sign up for an account or log in if you already have one.**
+2. **Explore the available quizzes.**
+3. **Take quizzes and answer the questions.**
+4. **View your scores.**
+
+## Contributing
+
+Contributions to Anime-x-Quiz are welcome! To contribute, please follow these steps:
+
+1. **Fork the repository.**
+2. **Create a new branch (`git checkout -b feature-branch`).**
+3. **Make your changes.**
+4. **Commit your changes (`git commit -am 'Add new feature'`).**
+5. **Push to the branch (`git push origin feature-branch`).**
+6. **Create a new Pull Request.**
+
+
+## Contact
+
+For any inquiries or feedback, please contact the team at 
