@@ -29,6 +29,13 @@ connection = pymysql.connect(
 )
 
 
+def get_profile_picture(user_id):
+    user = User.query.get(user_id)
+    if user and user.profile:
+        return user.profile.avatar
+    return 'default_avatar.jpg'
+
+
 def get_total_score():
     # Check if the user is authenticated
     if current_user.is_authenticated:
@@ -52,10 +59,12 @@ def get_leaderboard_data():
     # Populate the leaderboard data with unique users and their total scores
     for score in scores:
         if score.user_id not in leaderboard_data:
-            leaderboard_data[score.user_id] = 0
-        
-        # Accumulate the total score for each user
-        leaderboard_data[score.user_id] += score.score
+            user = User.query.get(score.user_id)
+            leaderboard_data[score.user_id] = (user.username, score.score)
+        else:
+            # Add the score to the existing user entry
+            username, current_score = leaderboard_data[score.user_id]
+            leaderboard_data[score.user_id] = (username, current_score + score.score)
 
     return leaderboard_data
 
@@ -244,7 +253,9 @@ def quiz_results():
     return render_template('quiz_results.html', title='Quiz Results', quiz_score=quiz_score, total_score=total_score)
 
 
-@app.route('/make_quiz')
-def make_quiz():
+@app.route('/leaderboard')
+def leaderboard():
     # Your view logic here
-    return render_template('new_quiz.html')
+    total_score = get_total_score()
+    leaderboard_data = get_leaderboard_data()
+    return render_template('quizleaderboard.html', title='Quiz', leaderboard_data=leaderboard_data, get_username=get_username, get_profile_picture=get_profile_picture, total_score=total_score)
