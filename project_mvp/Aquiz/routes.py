@@ -15,6 +15,7 @@ from Aquiz.models import User, Profile, Score, Quiz, Question, Option
 from flask_login import login_user, current_user, logout_user, login_required
 from flask import jsonify
 from sqlalchemy import desc
+from collections import defaultdict
 
 
 
@@ -41,6 +42,29 @@ def get_total_score():
     else:
         # Return 0 or handle the case when the user is not authenticated
         return 0  # You can adjust this based on your requirements
+
+
+def get_leaderboard_data():
+    leaderboard_data = {}
+    # Query database to retrieve scores ordered by score in descending order
+    scores = Score.query.order_by(Score.score.desc()).all()
+
+    # Populate the leaderboard data with unique users and their total scores
+    for score in scores:
+        if score.user_id not in leaderboard_data:
+            leaderboard_data[score.user_id] = 0
+        
+        # Accumulate the total score for each user
+        leaderboard_data[score.user_id] += score.score
+
+    return leaderboard_data
+
+
+def get_username(user_id):
+    user = User.query.get(user_id)
+    if user:
+        return user.username
+    return "Unknown User"
 
 
 @app.route('/')
@@ -165,7 +189,8 @@ def account():
 def quiz():
     total_score = get_total_score()
     quizzes = Quiz.query.all()
-    return render_template('quiz.html', title='Quiz', quizzes=quizzes, total_score=total_score)
+    leaderboard_data = get_leaderboard_data()
+    return render_template('quiz.html', title='Quiz', quizzes=quizzes, total_score=total_score, leaderboard_data=leaderboard_data, get_username=get_username)
 
 
 @app.route('/quiz/<int:quiz_id>', methods=['GET', 'POST'])

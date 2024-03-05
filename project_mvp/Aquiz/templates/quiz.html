@@ -1,9 +1,40 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Quiz</h1>
-<ul>
-  {% for quiz in quizzes %}
-    <li><a href="{{ url_for('quiz_questions', quiz_id=quiz.id) }}">{{ quiz.title }}</a></li>
-  {% endfor %}
-</ul>
+<div class="container2">
+  <div class="content-wrapper">
+    <div class="quizzes-column">
+      <h1>Quiz</h1>
+      <ul>
+        {% for quiz in quizzes %}
+          <li><a href="{{ url_for('quiz_questions', quiz_id=quiz.id) }}">{{ quiz.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="leaderboard-column">
+      <h2>Leaderboard</h2>
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% set rank= namespace(value=1) %}
+          {% for user_id, score in leaderboard_data.items() %}
+            {% if rank.value < 6 %}
+            <tr>
+              <td>{{ rank.value }}</td>
+              {% set rank.value = rank.value + 1 %}
+              <td>{{ get_username(user_id) }}</td>
+              <td>{{ score }}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}
