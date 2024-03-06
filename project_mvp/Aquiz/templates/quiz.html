@@ -2,10 +2,16 @@
 {% block content %}
 <div class="container2">
   <div class="content-wrapper">
+    <div class="last-quiz">
+      <h2>Last Added Quiz</h2>
+      <div>
+        <a href="{{ url_for('quiz_questions', quiz_id=quizzes[-1].id) }}">{{ quizzes[-1].title }}</a>
+      </div>
+    </div>
     <div class="quizzes-column">
-      <h1>Quiz</h1>
+      <h2>Other Quizzes</h2>
       <ul>
-        {% for quiz in quizzes %}
+        {% for quiz in quizzes[:-1] %}
           <li><a href="{{ url_for('quiz_questions', quiz_id=quiz.id) }}">{{ quiz.title }}</a></li>
         {% endfor %}
       </ul>
