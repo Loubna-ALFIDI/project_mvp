@@ -32,7 +32,7 @@ connection = pymysql.connect(
 def get_profile_picture(user_id):
     user = User.query.get(user_id)
     if user and user.profile:
-        return user.profile.avatar
+        return url_for('static', filename=f'images/{user.profile.avatar}')
     return 'default_avatar.jpg'
 
 
@@ -80,7 +80,7 @@ def get_username(user_id):
 @app.route('/main')
 def about():
     if current_user.is_authenticated:
-        image_file = get_profile_picture(current_user.id)
+        image_file = url_for('static', filename='images/' + current_user.profile.avatar)
         total_score = get_total_score()
         return render_template('main.html', title='Home', total_score=total_score, image_file=image_file)
     return render_template('main.html', title='Home')
@@ -95,7 +95,7 @@ def about():
 
 @app.route('/Quiz')
 def quiz_page():
-    image_file = get_profile_picture(current_user.id)
+    image_file = url_for('static', filename='images/' + current_user.profile.avatar)
     total_score = get_total_score()
     return render_template('quiz.html', title='Quiz', total_score=total_score, image_file=image_file)
 
@@ -163,7 +163,8 @@ def save_pfp(form_pfp):
     print(picture_path)
 
     resize_pic = (256, 256)
-    img = Image.open(form_pfp)
+    form_pfp.save(picture_path)  # Save the file
+    img = Image.open(picture_path)  # Open the saved file
     img.thumbnail(resize_pic)
     img.save(picture_path)
 
@@ -176,10 +177,13 @@ def account():
     form = updateprofileForm()
     if form.validate_on_submit():
         if form.new_avatar.data:
+            print(form.new_avatar.data)
             current_user.profile.avatar = url_for('static', filename='images/' + form.new_avatar.data)
+            print("im new avatar", current_user.profile.avatar)
         elif form.pfp.data:
             pic_file = save_pfp(form.pfp.data)
             current_user.profile.avatar = pic_file
+            print(current_user.profile.avatar)
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.profile.bio = form.bio.data
@@ -190,7 +194,7 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
         form.bio.data = current_user.profile.bio
-    image_file = current_user.profile.avatar
+    image_file = url_for('static', filename='images/' + current_user.profile.avatar)
     print(image_file)
     total_score = get_total_score()
     return render_template('account.html', title='Account',
@@ -209,6 +213,7 @@ def quiz():
 
 @app.route('/quiz/<int:quiz_id>', methods=['GET', 'POST'])
 def quiz_questions(quiz_id):
+    image_file = get_profile_picture(current_user.id)
     total_score = get_total_score()
     quiz = Quiz.query.get_or_404(quiz_id)
     questions = quiz.questions
@@ -239,12 +244,13 @@ def quiz_questions(quiz_id):
 
         flash('Answers submitted successfully', 'success')
         return redirect(url_for('quiz_results'))  # Redirect to a results page
-    return render_template('quiz_questions.html', title='Quiz Questions', quiz=quiz, questions=questions, total_score=total_score, num_questions=num_questions)
+    return render_template('quiz_questions.html', title='Quiz Questions', quiz=quiz, questions=questions, total_score=total_score, num_questions=num_questions, image_file=image_file)
 
 
 @app.route('/quiz/results')
 @login_required
 def quiz_results():
+    image_file = get_profile_picture(current_user.id)
     total_score = get_total_score()
     # Retrieve the latest score for the current user
     latest_score = Score.query.filter_by(user_id=current_user.id).order_by(desc(Score.id)).first()
@@ -255,12 +261,13 @@ def quiz_results():
     else:
         quiz_score = 0
 
-    return render_template('quiz_results.html', title='Quiz Results', quiz_score=quiz_score, total_score=total_score)
+    return render_template('quiz_results.html', title='Quiz Results', quiz_score=quiz_score, total_score=total_score, image_file=image_file)
 
 
 @app.route('/leaderboard')
 def leaderboard():
     # Your view logic here
+    image_file = url_for('static', filename='images/' + current_user.profile.avatar)
     total_score = get_total_score()
     leaderboard_data = get_leaderboard_data()
-    return render_template('quizleaderboard.html', title='Quiz', leaderboard_data=leaderboard_data, get_username=get_username, get_profile_picture=get_profile_picture, total_score=total_score)
+    return render_template('quizleaderboard.html', title='Quiz', leaderboard_data=leaderboard_data, get_username=get_username, get_profile_picture=get_profile_picture, total_score=total_score, image_file=image_file)
