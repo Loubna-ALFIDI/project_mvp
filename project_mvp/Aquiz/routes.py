@@ -200,7 +200,11 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
         form.bio.data = current_user.profile.bio
-    image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    if 'static/' not in current_user.profile.avatar:
+        image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    else:
+        image_file = '/' + current_user.profile.avatar
+    print(current_user.profile.avatar)
     print(image_file)
     total_score = get_total_score()
     return render_template('account.html', title='Account',
