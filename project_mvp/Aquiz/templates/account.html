@@ -6,6 +6,7 @@
         <img src="{{ image_file }}" alt="Profile Picture">
         <p>{{ current_user.username }}</p>
         <p>{{ current_user.profile.bio }}</p>
+        <p>Member since {{ current_user.created_at.strftime('%m/%d/%Y') }}</p>
         <p style="color: rgb(138, 235, 11);">Score: {{ total_score }}</p>
         <p>Email: {{ current_user.email }}</p>
         <!-- Add more profile details as needed -->

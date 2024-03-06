@@ -80,7 +80,10 @@ def get_username(user_id):
 @app.route('/main')
 def about():
     if current_user.is_authenticated:
-        image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+        if 'static/' not in current_user.profile.avatar:
+            image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+        else:
+            image_file = '/' + current_user.profile.avatar
         total_score = get_total_score()
         return render_template('main.html', title='Home', total_score=total_score, image_file=image_file)
     return render_template('main.html', title='Home')
@@ -95,7 +98,10 @@ def about():
 
 @app.route('/Quiz')
 def quiz_page():
-    image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    if 'static/' not in current_user.profile.avatar:
+        image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    else:
+        image_file = '/' + current_user.profile.avatar
     total_score = get_total_score()
     return render_template('quiz.html', title='Quiz', total_score=total_score, image_file=image_file)
 
@@ -204,7 +210,10 @@ def account():
 @app.route('/quiz')
 @login_required
 def quiz():
-    image_file = get_profile_picture(current_user.id)
+    if 'static/' not in current_user.profile.avatar:
+        image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    else:
+        image_file = '/' + current_user.profile.avatar
     total_score = get_total_score()
     quizzes = Quiz.query.all()
     leaderboard_data = get_leaderboard_data()
@@ -213,7 +222,10 @@ def quiz():
 
 @app.route('/quiz/<int:quiz_id>', methods=['GET', 'POST'])
 def quiz_questions(quiz_id):
-    image_file = get_profile_picture(current_user.id)
+    if 'static/' not in current_user.profile.avatar:
+        image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    else:
+        image_file = '/' + current_user.profile.avatar
     total_score = get_total_score()
     quiz = Quiz.query.get_or_404(quiz_id)
     questions = quiz.questions
@@ -250,7 +262,10 @@ def quiz_questions(quiz_id):
 @app.route('/quiz/results')
 @login_required
 def quiz_results():
-    image_file = get_profile_picture(current_user.id)
+    if 'static/' not in current_user.profile.avatar:
+        image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    else:
+        image_file = '/' + current_user.profile.avatar
     total_score = get_total_score()
     # Retrieve the latest score for the current user
     latest_score = Score.query.filter_by(user_id=current_user.id).order_by(desc(Score.id)).first()
@@ -267,7 +282,26 @@ def quiz_results():
 @app.route('/leaderboard')
 def leaderboard():
     # Your view logic here
-    image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    if 'static/' not in current_user.profile.avatar:
+        image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    else:
+        image_file = '/' + current_user.profile.avatar
     total_score = get_total_score()
     leaderboard_data = get_leaderboard_data()
     return render_template('quizleaderboard.html', title='Quiz', leaderboard_data=leaderboard_data, get_username=get_username, get_profile_picture=get_profile_picture, total_score=total_score, image_file=image_file)
+
+
+@app.route('/user/<int:user_id>')
+def user_profile(user_id):
+    if 'static/' not in current_user.profile.avatar:
+        image_file = url_for('static', filename='images/' + current_user.profile.avatar)
+    else:
+        image_file = '/' + current_user.profile.avatar
+    user = User.query.get_or_404(user_id)
+    if 'static/' not in user.profile.avatar:
+        user_image = url_for('static', filename='images/' + user.profile.avatar)
+    else:
+        user_image = '/' + user.profile.avatar
+    print(user_image)
+    total_score = get_total_score()  # Or any other way to calculate total score for this user
+    return render_template('user_profile.html', title='User Profile', user=user, user_image=user_image, total_score=total_score, image_file=image_file)

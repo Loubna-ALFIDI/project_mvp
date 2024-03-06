@@ -30,7 +30,7 @@
             <tr>
               <td>{{ rank.value }}</td>
               {% set rank.value = rank.value + 1 %}
-              <td>{{ username }}</td>
+              <td><a href="{{ url_for('user_profile', user_id=user_id) }}">{{ username }}</a></td>
               <td>{{ score }}</td>
             </tr>
             {% endif %}
