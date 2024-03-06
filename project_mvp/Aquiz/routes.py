@@ -79,9 +79,11 @@ def get_username(user_id):
 @app.route('/')
 @app.route('/main')
 def about():
-    image_file = get_profile_picture(current_user.id)
-    total_score = get_total_score()
-    return render_template('main.html', title='Home', total_score=total_score, image_file=image_file)
+    if current_user.is_authenticated:
+        image_file = get_profile_picture(current_user.id)
+        total_score = get_total_score()
+        return render_template('main.html', title='Home', total_score=total_score, image_file=image_file)
+    return render_template('main.html', title='Home')
 
 # @app.route('/main/posts')
 # def posts_page():
@@ -100,7 +102,7 @@ def quiz_page():
 
 @app.route('/main/profile')
 def profile_page():
-    image_file = get_profile_picture(current_user.id)
+    image_file = current_user.profile.avatar
     total_score = get_total_score()
     return render_template('profile.html', title='Profile', image_file=image_file, total_score=total_score)
 

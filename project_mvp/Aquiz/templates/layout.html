@@ -16,9 +16,7 @@
 <body>
     <div class="container">
         <nav>
-            <a href="{{ url_for('about') }}">
-                <img src="../static/images/logo.png" alt="Your Logo" class="logopage">
-            </a>
+            <img src="../static/images/logo.png" alt="Your Logo" class="logopage" type="button">
             <ul>
                 <li><a href="{{ url_for('about') }}">Home</a></li>
                 <li>|</li>
@@ -31,8 +29,13 @@
             <!-- <button class="btn"><a href="{{ url_for('logout_page') }}">lOGOUT</a></button> -->
             {% else %}
                 <button class="btn"><a href="{{ url_for('Login_page') }}">Login</a></button>
-                <button class="btn"> <a href="{{ url_for('register_page') }}">Sign Up</a></button>
+                <button class="btn"> <a href="{{ url_for('register_page') }}">Sign-Up</a></button>
             {% endif %}
+        </nav>
+        <nav class="gradient-controls">
+            <input type="range" min="0" max="360" value="150" id="degRange">
+            <input type="range" min="0" max="255" value="114" id="alphaRange">
+            <input type="range" min="0" max="100" value="71" id="percentageRange">
         </nav>
         <div class="blockcntn">
             {% block content %}{% endblock %}
@@ -55,6 +58,24 @@
     <img src="../static/images/gojo2.jpg" alt="background" class="background-img">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../static/scripts/editprofile.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#degRange, #alphaRange, #percentageRange').on('input', function() {
+                const deg = $('#degRange').val();
+                const alpha = $('#alphaRange').val();
+                const percentage = $('#percentageRange').val();
+                const gradient = `linear-gradient(${deg}deg, rgba(2,0,36,1) 0%, rgba(26, ${alpha}, 239, 0.819) 0%, rgba(0,0,0,1) ${percentage}%)`;
+                $('.container').css('background', gradient);
+            });
+        });
+        $(document).ready(function() {
+            $('.gradient-controls input[type="range"]').hover(function() {
+                $(this).find('::-webkit-slider-thumb, ::-moz-range-thumb, ::-ms-thumb').css('transform', 'scale(1.2)');
+            }, function() {
+                $(this).find('::-webkit-slider-thumb, ::-moz-range-thumb, ::-ms-thumb').css('transform', 'scale(1)');
+            });
+        });
+    </script>
 </body>
 <footer class = '{{title}}'>
     <div class="footer">
