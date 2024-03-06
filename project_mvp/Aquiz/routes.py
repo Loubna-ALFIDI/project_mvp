@@ -79,8 +79,9 @@ def get_username(user_id):
 @app.route('/')
 @app.route('/main')
 def about():
+    image_file = get_profile_picture(current_user.id)
     total_score = get_total_score()
-    return render_template('main.html', title='Home', total_score=total_score)
+    return render_template('main.html', title='Home', total_score=total_score, image_file=image_file)
 
 # @app.route('/main/posts')
 # def posts_page():
@@ -92,14 +93,15 @@ def about():
 
 @app.route('/Quiz')
 def quiz_page():
+    image_file = get_profile_picture(current_user.id)
     total_score = get_total_score()
-    return render_template('quiz.html', title='Quiz', total_score=total_score)
+    return render_template('quiz.html', title='Quiz', total_score=total_score, image_file=image_file)
 
 
 @app.route('/main/profile')
 def profile_page():
+    image_file = get_profile_picture(current_user.id)
     total_score = get_total_score()
-    image_file = current_user.profile.avatar
     return render_template('profile.html', title='Profile', image_file=image_file, total_score=total_score)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -196,10 +198,11 @@ def account():
 @app.route('/quiz')
 @login_required
 def quiz():
+    image_file = get_profile_picture(current_user.id)
     total_score = get_total_score()
     quizzes = Quiz.query.all()
     leaderboard_data = get_leaderboard_data()
-    return render_template('quiz.html', title='Quiz', quizzes=quizzes, total_score=total_score, leaderboard_data=leaderboard_data, get_username=get_username)
+    return render_template('quiz.html', title='Quiz', quizzes=quizzes, total_score=total_score, leaderboard_data=leaderboard_data, get_username=get_username, image_file=image_file)
 
 
 @app.route('/quiz/<int:quiz_id>', methods=['GET', 'POST'])

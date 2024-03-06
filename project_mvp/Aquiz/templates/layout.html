@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime x Quiz - {{ title }}</title>
     <link rel="icon" href="../static/images/logoo.png">
-    <link rel="stylesheet" href="../static/styles/headerstyle.css">
+    <!-- <link rel="stylesheet" href="../static/styles/headerstyle.css"> -->
     <link rel="stylesheet" href="../static/styles/postsstyel.css">
     <link rel="stylesheet" href="../static/styles/profilestyle.css">
     <link rel="stylesheet" href="../static/styles/alertmsg.css">
@@ -14,35 +14,30 @@
 
 </head>
 <body>
-    <header>
-        <div class="container">
+    <div class="container">
+        <nav>
             <a href="{{ url_for('about') }}">
-                <img src="../static/images/logo.png" alt="Your Logo">
+                <img src="../static/images/logo.png" alt="Your Logo" class="logopage">
             </a>
-            <nav>
-                <ul>
-                    <li><a href="{{ url_for('about') }}">Home</a></li>
-                    <li><a href="{{ url_for('quiz') }}">Quiz</a></li>
-                    <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
-                    <div class="loginsignup">
-                        <nav class="user-buttons">
-                            <div class="user-button">
-                                {% if current_user.is_authenticated %}
-                                <button class="login"><a href="{{ url_for('logout_page') }}">lOGOUT</a></button>
-                                <p>{{ current_user.username }}</p>
-                                <p style="color: red;">Score: {{ total_score }}</p>
-                                <li><a href="{{ url_for('account') }}">Profile</a></li>
-                                {% else %}
-                                    <button class="login"><a href="{{ url_for('Login_page') }}">Login</a></button>
-                                    <button class="signup"> <a href="{{ url_for('register_page') }}">Sign Up</a></button>
-                                {% endif %}
-                            </div>
-                        </nav>
-                    </div>
-                </ul>
-            </nav>
+            <ul>
+                <li><a href="{{ url_for('about') }}">Home</a></li>
+                <li>|</li>
+                <li><a href="{{ url_for('quiz') }}">Quiz</a></li>
+                <li>|</li>
+                <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
+            </ul>
+            {% if current_user.is_authenticated %}
+            <button class="btn"><a href="{{ url_for('account') }}"><img src="{{ image_file }}" alt="Profile Picture">{{ current_user.username }}</a></button>
+            <!-- <button class="btn"><a href="{{ url_for('logout_page') }}">lOGOUT</a></button> -->
+            {% else %}
+                <button class="btn"><a href="{{ url_for('Login_page') }}">Login</a></button>
+                <button class="btn"> <a href="{{ url_for('register_page') }}">Sign Up</a></button>
+            {% endif %}
+        </nav>
+        <div class="blockcntn">
+            {% block content %}{% endblock %}
         </div>
-    </header>
+    </div>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="flash-messages">
@@ -57,7 +52,7 @@
             </div>
         {% endif %}
     {% endwith %}
-    {% block content %}{% endblock %}
+    <img src="../static/images/gojo2.jpg" alt="background" class="background-img">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../static/scripts/editprofile.js"></script>
 </body>
