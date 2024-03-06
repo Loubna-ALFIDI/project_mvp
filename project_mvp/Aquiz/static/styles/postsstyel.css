@@ -306,7 +306,7 @@ section {
 
 .content h1{
     width: 100%;
-    font-size: 90px;
+    font-size: clamp(95px, 4vw, 120px);
     margin-bottom: 5px;
     line-height: 100px;
     font-weight: bold;
