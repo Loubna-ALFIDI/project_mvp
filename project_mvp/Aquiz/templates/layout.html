@@ -24,6 +24,7 @@
                 <li>|</li>
                 <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
             </ul>
+            <button id="colorControlsButton" class="btn" type="button">Them</button>
             {% if current_user.is_authenticated %}
             <button class="btn"><a href="{{ url_for('account') }}"><img src="{{ image_file }}" alt="Profile Picture">{{ current_user.username }}</a></button>
             <!-- <button class="btn"><a href="{{ url_for('logout_page') }}">lOGOUT</a></button> -->
@@ -32,11 +33,13 @@
                 <button class="btn"> <a href="{{ url_for('register_page') }}">Sign-Up</a></button>
             {% endif %}
         </nav>
-        <nav class="gradient-controls">
-            <input type="range" min="0" max="360" value="150" id="degRange">
-            <input type="range" min="0" max="255" value="114" id="alphaRange">
-            <input type="range" min="0" max="100" value="71" id="percentageRange">
-        </nav>
+        <div class="gradient-controls-container">
+            <nav class="gradient-controls">
+                <input type="range" min="0" max="360" value="150" id="degRange">
+                <input type="color" id="colorPicker">
+                <input type="range" min="0" max="100" value="71" id="percentageRange">
+            </nav>
+        </div>
         <div class="blockcntn">
             {% block content %}{% endblock %}
         </div>
@@ -60,15 +63,33 @@
     <script src="../static/scripts/editprofile.js"></script>
     <script>
         $(document).ready(function() {
-            $('#degRange, #alphaRange, #percentageRange').on('input', function() {
-                const deg = $('#degRange').val();
-                const alpha = $('#alphaRange').val();
-                const percentage = $('#percentageRange').val();
-                const gradient = `linear-gradient(${deg}deg, rgba(2,0,36,1) 0%, rgba(26, ${alpha}, 239, 0.819) 0%, rgba(0,0,0,1) ${percentage}%)`;
-                $('.container').css('background', gradient);
+            // Extracting the color value from the CSS background gradient
+            const initialColor = $('.container').css('background').match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/)[0];
+            // Setting the initial color value to the color picker input
+            $('#colorPicker').val(initialColor);
+            $('#colorControlsButton').on('click', function() {
+                $('.gradient-controls-container').toggleClass('show');
             });
-        });
-        $(document).ready(function() {
+            $(document).on('click', function(event) {
+                if (!$(event.target).closest('.gradient-controls-container').length && !$(event.target).is('#colorControlsButton')) {
+                    $('.gradient-controls-container').removeClass('show');
+                }
+            });
+            $('#degRange, #percentageRange').on('input', function() {
+                updateGradient();
+            });
+    
+            $('#colorPicker').on('change', function() {
+                updateGradient();
+            });
+    
+            function updateGradient() {
+                const deg = $('#degRange').val();
+                const color = $('#colorPicker').val();
+                const percentage = $('#percentageRange').val();
+                const gradient = `linear-gradient(${deg}deg, rgba(2,0,36,1) 0%, ${color} 0%, rgba(0,0,0,1) ${percentage}%)`;
+                $('.container').css('background', gradient);
+            };
             $('.gradient-controls input[type="range"]').hover(function() {
                 $(this).find('::-webkit-slider-thumb, ::-moz-range-thumb, ::-ms-thumb').css('transform', 'scale(1.2)');
             }, function() {
