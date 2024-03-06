@@ -14,6 +14,7 @@
   }
   
   .first-place-user .profile-pic {
+    object-fit: cover;
     border: 3px solid yellow; /* Add a yellow border */
     border-radius: 50%; /* Make the profile picture round */
     width: 100px; /* Adjust the width of the profile picture */
