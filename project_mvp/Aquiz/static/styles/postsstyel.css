@@ -161,7 +161,7 @@
 
 
 /* Header styles */
-nav {
+.head {
     z-index: 1;
     font-family: 'Clash Display', sans-serif;
     font-weight: bold;
@@ -178,11 +178,11 @@ nav {
     margin-right: -50px;
 }
 
-nav img {
+.head img {
     z-index: 1;
 }
 
-nav ul {
+.head ul {
     z-index: 1;
     list-style: none;
     width: 100%;
@@ -191,20 +191,20 @@ nav ul {
     margin-left: 70px;
 }
 
-nav ul li {
+.head ul li {
     display: inline-block; /* Change to inline-block to allow margin and padding adjustments */
     margin: 10px 20px; /* Adjust margins between list items */
     color: #fff;
 }
 
-nav ul li a {
+.head ul li a {
     color: #fff;
     text-decoration: none;
     font-family: 'ClashDisplay', sans-serif;
     font-weight: bold;
 }
 
-nav ul li:hover {
+.head ul li:hover {
     color: #2e00fd;
     text-decoration: underline;
 }
@@ -232,7 +232,7 @@ footer {
     border-radius: 70px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     background: #bbbbbb00;
-    box-shadow: 0 8px 32px 0 rgba(27, 27, 27, 0.37);
+    box-shadow: 0 0px 0px 0 rgba(27, 27, 27, 0.37);
     background-image: linear-gradient(45deg, transparent 50%, #000000 50%);
     background-position: 25%;
     color: #d3d3d3;
@@ -283,10 +283,11 @@ footer {
 /* Post styles */
 section {
     padding: 20px 0;
-}nav {
+}
+/* .head {
     display: flex;
     align-items: center;
-}
+} */
 
 .logopage {
     margin-left: 10px; /* Adjust the left margin of the logo image */
