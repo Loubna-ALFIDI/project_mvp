@@ -29,6 +29,31 @@ connection = pymysql.connect(
 )
 
 
+def get_quiz_statistics(user_id):
+    # Calculate total quiz attempts
+    total_attempts = Score.query.filter_by(user_id=user_id).count()
+
+    # Calculate average quiz score
+    user_scores = Score.query.filter_by(user_id=user_id).all()
+    total_score = sum(score.score for score in user_scores)
+    average_score = total_score / max(len(user_scores), 1)
+    average_score = round(average_score, 2)  # Round to 2 decimal places
+
+    # Retrieve the most recent quiz played by the user
+    most_recent_quiz = (
+        db.session.query(Quiz.title)
+        .join(Score, Score.quiz_id == Quiz.id)
+        .filter(Score.user_id == user_id)
+        .order_by(Score.id.desc())
+        .first()
+    )
+
+    return {
+        'total_attempts': total_attempts,
+        'average_score': average_score,
+        'most_recent_quiz': most_recent_quiz[0] if most_recent_quiz else None
+    }
+
 def get_profile_picture(user_id):
     user = User.query.get(user_id)
     if user and user.profile:
@@ -206,9 +231,12 @@ def account():
         image_file = '/' + current_user.profile.avatar
     print(current_user.profile.avatar)
     print(image_file)
+    quiz_stats = get_quiz_statistics(current_user.id)
     total_score = get_total_score()
     return render_template('account.html', title='Account',
-                           image_file=image_file, form=form, total_score=total_score)
+                           image_file=image_file, form=form, total_score=total_score, total_attempts=quiz_stats['total_attempts'],
+                            average_score=quiz_stats['average_score'],
+                            most_recent_quiz=quiz_stats['most_recent_quiz'])
 
 
 @app.route('/quiz')
@@ -307,5 +335,8 @@ def user_profile(user_id):
     else:
         user_image = '/' + user.profile.avatar
     print(user_image)
+    quiz_stats = get_quiz_statistics(user_id)
     total_score = get_total_score()  # Or any other way to calculate total score for this user
-    return render_template('user_profile.html', title='User Profile', user=user, user_image=user_image, total_score=total_score, image_file=image_file)
+    return render_template('user_profile.html', title='User Profile', user=user, user_image=user_image, total_score=total_score, image_file=image_file, total_attempts=quiz_stats['total_attempts'],
+                            average_score=quiz_stats['average_score'],
+                            most_recent_quiz=quiz_stats['most_recent_quiz'])
