@@ -267,29 +267,50 @@
 }
 
 /* style for score */
+
+
 .profile-score {
-    /* Add your styles here */
-    margin-bottom: 50px;
+    padding: 10px;
+    margin-bottom: 140px;
     margin-top: 160px;
-    width: 150px;
-    height: 150px;
+    width: auto;
+    height: auto;
     font-family: 'inter', serif;
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(27, 27, 27, 0.37);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-radius: 50%;
+    border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.profile-score li {
-    /* Add your styles here */
+.profile-score h4 {
+    font-family: 'Clash Display', serif;;
+    justify-content: center;
+    color: green;
+    margin-left: 40%;
+}
+
+.profile-score ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-left: -20%;
+}
+
+.profile-score ul li {
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: 100px;
+    align-items: center;
     color: #b8b8b8;
     font-size: 20px;
-    list-style-type: none;
+}
+
+.profile-score ul li p {
     margin: 0;
-    padding: 0;
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: bold;
+    color: #b8b8b8;
 }
